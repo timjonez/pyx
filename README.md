@@ -1,6 +1,6 @@
 # Pyx - JSX-like Syntax for Python
 
-A lightweight transpiler that brings JSX-like syntax to Python, generating HTML strings. Write familiar-looking components with Python types and transpile them to standard Python.
+PYX is a lightweight library that brings JSX-like syntax to Python, generating HTML strings. Write familiar-looking components with Python types and compile them to standard Python.
 
 ## Features
 
@@ -11,6 +11,10 @@ A lightweight transpiler that brings JSX-like syntax to Python, generating HTML 
 - **F-string support** inside expressions
 - **Python type annotations** fully preserved
 - **Server-side HTML rendering** - outputs plain HTML strings
+
+## Demo Project
+
+For a complete, working application built with Pyx, check out **[pyx-todo](https://github.com/timjonez/pyx-todo)** — a full todo app that demonstrates real-world usage of PYX in a project structure.
 
 ## Quick Start
 
@@ -166,14 +170,14 @@ Component calls are rendered inline — they can appear before, between, or afte
 ## How It Works
 
 1. **Write** `.pyx` files with JSX-like syntax inside `return (...)` or assignment statements
-2. **Transpile** with `pyx.cli` or the `transpile()` function
+2. **Compile** with `pyx.cli` or the `transpile()` function
 3. **Run** the generated `.py` files - they produce HTML strings using a simple `_buf` list + `join()` pattern
 
 ## Project Structure
 
 ```
 pyx/
-  transpiler.py    # Core .pyx -> .py transpiler
+  transpiler.py    # Core .pyx -> .py compiler
   runtime.py       # _escape() helper for HTML escaping
   cli.py           # Command-line interface
 examples/

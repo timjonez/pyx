@@ -12,6 +12,10 @@ A lightweight transpiler that brings JSX-like syntax to Python, generating HTML 
 - **Python type annotations** fully preserved
 - **Server-side HTML rendering** - outputs plain HTML strings
 
+## Demo Project
+
+For a complete, working application built with Pyx, check out **[pyx-todo](https://github.com/timjonez/pyx-todo)** — a full todo app that demonstrates real-world usage of the transpiler in a project structure.
+
 ## Quick Start
 
 Write a `.pyx` file:

@@ -114,6 +114,55 @@ def formatted(name: str, age: int) -> str:
     )
 ```
 
+### Nested Components
+
+Call component functions directly inside JSX blocks — no brackets needed:
+
+```python
+def card(title: str, children: str = "") -> str:
+    return (
+        <div class="card">
+            <h2>{title}</h2>
+            <div class="card-body">{children}</div>
+        </div>
+    )
+
+def alert(message: str, level: str = "info") -> str:
+    return (
+        <div class={f"alert alert-{level}"}>
+            <strong>{message}</strong>
+        </div>
+    )
+
+def page() -> str:
+    return (
+        <div class="container">
+            <h1>My Page</h1>
+            card(title="Welcome", children="Hello World")
+            alert(message="Something happened!", level="warning")
+        </div>
+    )
+
+# Components in loops work too:
+def user_card(name: str, email: str) -> str:
+    return (
+        <div class="user-card">
+            <h3>{name}</h3>
+            <p>{email}</p>
+        </div>
+    )
+
+def user_list(users: list[dict]) -> str:
+    return (
+        <div class="user-list">
+            for user in users:
+                user_card(name=user["name"], email=user["email"])
+        </div>
+    )
+```
+
+Component calls are rendered inline — they can appear before, between, or after HTML tags.
+
 ## How It Works
 
 1. **Write** `.pyx` files with JSX-like syntax inside `return (...)` or assignment statements

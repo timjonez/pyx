@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Generated .py files from .pyx transpilation
+examples/*.py
+!examples/*.pyx
+
+# uv lock file (should be committed for apps, but let's ignore for library)
+uv.lock
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/

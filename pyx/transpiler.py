@@ -145,6 +145,15 @@ class JsxTokenizer:
                 self.tokens.append({"type": "close_tag", "tag": tag})
 
             elif self.peek() == "<":
+                if self.peek(2) == "<!":
+                    # HTML declaration (e.g. <!DOCTYPE html>) — emit literally
+                    decl = self.read_until(">")
+                    tail = ""
+                    if not self.at_end() and self.peek() == ">":
+                        self.advance()
+                        tail = ">"
+                    self.tokens.append({"type": "text", "text": decl + tail})
+                    continue
                 # Opening or self-closing tag
                 self.advance()
                 tag = self.read_tag_name()
@@ -305,6 +314,10 @@ class JsxParser:
                 self.advance()
             elif stripped.startswith("</"):
                 # Closing tag - just skip it (it was handled by the matching opener)
+                self.advance()
+            elif stripped.startswith("<!"):
+                # HTML declaration (e.g. <!DOCTYPE html>) — emit literally
+                nodes.extend(self.parse_text_line())
                 self.advance()
             elif stripped.startswith("<"):
                 nodes.append(self.parse_element())

@@ -169,6 +169,40 @@ def formatted(name, age):
         assert "Hello Alice, you are 30 years old" in html
 
 
+class TestDoctype:
+    def test_doctype_html(self):
+        source = '''
+def page():
+    return (
+        <!DOCTYPE html>
+        <html lang="en">
+            <body>Hello</body>
+        </html>
+    )
+'''
+        result = transpile(source)
+        ns = {"_escape": _escape}
+        exec(result, ns)
+        html = ns["page"]()
+        assert "<!DOCTYPE html>" in html
+        assert "<html lang=\"en\">" in html
+        assert "<body>Hello</body>" in html
+
+    def test_doctype_uppercase(self):
+        source = '''
+def page():
+    return (
+        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+        <html><body>Hi</body></html>
+    )
+'''
+        result = transpile(source)
+        ns = {"_escape": _escape}
+        exec(result, ns)
+        html = ns["page"]()
+        assert '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">' in html
+
+
 class TestNestedComponents:
     def test_component_function_call(self):
         source = '''
